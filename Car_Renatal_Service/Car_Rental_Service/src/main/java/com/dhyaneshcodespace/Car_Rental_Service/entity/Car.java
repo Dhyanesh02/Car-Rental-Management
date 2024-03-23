@@ -1,5 +1,6 @@
 package com.dhyaneshcodespace.Car_Rental_Service.entity;
 
+import com.dhyaneshcodespace.Car_Rental_Service.dto.CarDto;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
@@ -25,5 +26,21 @@ public class Car {
 
     @Column(columnDefinition = "longblob")
     private byte[] image;
+
+    public CarDto getCarDto(){
+        CarDto carDto = new CarDto();
+        carDto.setId(id);
+        carDto.setName(name);
+        carDto.setBrand(brand);
+        carDto.setColor(color);
+        carDto.setType(type);
+        carDto.setTransmission(transmission);
+        carDto.setDescription(description);
+        carDto.setPrice(price);
+        carDto.setYear(year);
+        carDto.setReturnedImage(image);
+        return carDto;
+    }
+
 
 }

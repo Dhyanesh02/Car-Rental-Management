@@ -6,7 +6,7 @@ import com.dhyaneshcodespace.Car_Rental_Service.dto.SignupRequest;
 import com.dhyaneshcodespace.Car_Rental_Service.dto.UserDto;
 import com.dhyaneshcodespace.Car_Rental_Service.entity.User;
 import com.dhyaneshcodespace.Car_Rental_Service.repository.UserRepository;
-import com.dhyaneshcodespace.Car_Rental_Service.services.auth.AuthService;
+// import com.dhyaneshcodespace.Car_Rental_Service.services.auth.AuthService;
 import com.dhyaneshcodespace.Car_Rental_Service.services.auth.AuthServiceImpl;
 import com.dhyaneshcodespace.Car_Rental_Service.services.jwt.UserService;
 import com.dhyaneshcodespace.Car_Rental_Service.utils.JWTUtil;

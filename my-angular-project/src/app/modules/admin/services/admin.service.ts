@@ -19,12 +19,32 @@ export class AdminService {
       headers:this.createAuthorizationHeader()
     });
   } 
+  getAllCars():Observable<any>{
+    return this.http.get(BASIC_URL + "/api/admin/cars",{
+     headers:this.createAuthorizationHeader()
+    })
+  } 
+  deleteCar(id: number):Observable<any>{
+    return this.http.delete(BASIC_URL+"/api/admin/car/"+id,{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  getCarById(id: number):Observable<any>{
+    return this.http.get(BASIC_URL+"/api/admin/car/"+id,{
+      headers:this.createAuthorizationHeader()
+    });
+  }
+  updateCar(carId: number,carDto: any):Observable<any>{
+    return this.http.put(BASIC_URL+"/api/admin/car/"+ carId, carDto,{
+    headers:this.createAuthorizationHeader()
+    });
+  }
 
   createAuthorizationHeader(): HttpHeaders {
     let authHeaders: HttpHeaders = new HttpHeaders();
     return authHeaders.set(
       'Authorization',
-      'Bearer ' + StorageService.getToken() // Added space after 'Bearer'
-    );
+      'Bearer ' + StorageService.getToken() 
+    ); 
   }
 }

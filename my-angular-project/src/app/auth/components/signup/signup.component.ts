@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuthService } from '../../services/auth/auth.service';
 import {NzMessageService} from "ng-zorro-antd/message";
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -39,18 +40,41 @@ export class SignupComponent {
     }
     return{};
   };
-  register(){
+  // register(){
+  //   console.log(this.signupForm.value);
+  //   this.authService.register(this.signupForm.value).subscribe((res)=>{
+  //     console.log(res);
+  //     if (res.id!=null){
+  //       this.message.success("Signup Successful",{nzDuration:3000});
+  //       this.router.navigateByUrl("/login");
+  //     }
+  //     else{
+  //       if (res.error && res.error.message === 'Username already exists') {
+  //         this.message.error("Username already exists!", { nzDuration: 3000 });
+  //       } else {
+  //         this.message.error("Something went wrong!", { nzDuration: 3000 });
+  //       }
+  //     }
+  //   })
+  // }
+  register() {
     console.log(this.signupForm.value);
-    this.authService.register(this.signupForm.value).subscribe((res)=>{
-      console.log(res);
-      if (res.id!=null){
-        this.message.success("Signup Successful",{nzDuration:3000});
-        this.router.navigateByUrl("/login");
+    this.authService.register(this.signupForm.value).subscribe(
+      (res) => {
+        console.log(res);
+        if (res.id != null) {
+          this.message.success("Signup Successful", { nzDuration: 3000 });
+          this.router.navigateByUrl("/login");
+        }
+      },
+      (error: HttpErrorResponse) => { // Handle error response
+        if (error.status === 406 && error.error === "Customer already exists with this email address") {
+          this.message.error("Customer already exists with this email address!", { nzDuration: 3000 });
+        } else {
+          this.message.error("Something went wrong!", { nzDuration: 3000 });
+        }
       }
-      else{
-        this.message.error("Something Went Wrong!",{nzDuration:3000});
-      }
-    })
+    );
   }
 }
 
