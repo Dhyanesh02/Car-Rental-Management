@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
     private final CarRepository carRepository;
     private final UserRepository userRepository;
     private final BookACarRepository bookACarRepository;
@@ -33,19 +33,40 @@ public class CustomerServiceImpl implements CustomerService{
     public boolean bookACar(BookACarDto bookACarDto) {
         Optional<Car> optionalCar = carRepository.findById(bookACarDto.getCarId());
         Optional<User> optionalUser = userRepository.findById(bookACarDto.getUserId());
-        if(optionalCar.isPresent() && optionalUser.isPresent()){
+        if (optionalCar.isPresent() && optionalUser.isPresent()) {
             Car existingCar = optionalCar.get();
-            BookACar bookACar = new BookACar();
-            bookACar.setUser(optionalUser.get());
-            bookACar.setCar(existingCar);
-            bookACar.setBookCarStatus(BookCarStatus.PENDING);
-            long diffInMilliSeconds = bookACarDto.getToDate().getTime() - bookACarDto.getFromDate().getTime();
-            long days = TimeUnit.MICROSECONDS.toDays(diffInMilliSeconds);
-            bookACar.setDays(days);
-            bookACar.setPrice(existingCar.getPrice()*days);
+            User user = optionalUser.get();
+
+            BookACar bookACar = createBooking(existingCar, user, bookACarDto);
             bookACarRepository.save(bookACar);
+
             return true;
         }
         return false;
+    }
+
+    @Override
+    public CarDto getCarById(Long carId) {
+        Optional<Car> optionalCar = carRepository.findById(carId);
+        return optionalCar.map(Car::getCarDto).orElse(null);
+    }
+
+    @Override
+    public List<BookACarDto> getBookingsByUserId(Long userId) {
+        return bookACarRepository.findAllByUserId(userId).stream().map(BookACar::getBookACarDto).collect(Collectors.toList());
+    }
+
+    private BookACar createBooking(Car car, User user, BookACarDto bookACarDto) {
+        BookACar bookACar = new BookACar();
+        bookACar.setUser(user);
+        bookACar.setCar(car);
+        bookACar.setBookCarStatus(BookCarStatus.PENDING);
+
+        long diffInMilliSeconds = bookACarDto.getToDate().getTime() - bookACarDto.getFromDate().getTime();
+        long days = TimeUnit.MILLISECONDS.toDays(diffInMilliSeconds);
+        bookACar.setDays(days);
+        bookACar.setPrice(car.getPrice() * days);
+
+        return bookACar;
     }
 }

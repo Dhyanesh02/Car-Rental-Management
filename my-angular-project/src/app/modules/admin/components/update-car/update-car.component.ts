@@ -45,15 +45,20 @@ export class UpdateCarComponent {
     this.getCarById();
   }
 
-  getCarById(){
+  getCarById() {
     this.isSpinning = true;
-    this.adminService.getCarById(this.carId).subscribe((res)=>{
+    this.adminService.getCarById(this.carId).subscribe((res) => {
       this.isSpinning = false;
       const carDto = res;
-      this.existingImage='data:image/jpeg;base64,'+ res.returnedImage;
+      
+      // Convert date strings to Date objects
+      carDto.datePurchased = new Date(carDto.datePurchased);
+      carDto.dateManufactured = new Date(carDto.dateManufactured);
+      
+      this.existingImage = 'data:image/jpeg;base64,' + res.returnedImage;
       this.updateForm.patchValue(carDto);
       console.log(res);
-    })
+    });
   }
   updateCar(){
     this.isSpinning= true;

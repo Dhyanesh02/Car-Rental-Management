@@ -1,8 +1,7 @@
 <!-- <p>customer-dashboard works!</p> -->
 
 
-
-<div>
+<div >
   <div style="margin-top: 10px;"></div>
   <div class="parent">
     <div style="margin-top:10px" class="child" *ngFor="let car of cars">
@@ -18,6 +17,15 @@
             <b>{{car.transmission}}</b> - Type: <b>{{car.type}}</b> - Year: <b>{{car.year | date: 'yyyy'}}</b>
           </h5>
           <hr>
+          <div class="button-container">
+            <button
+              nzSize="small"              
+              nz-button
+              nzType="primary"
+              routerLink="/customer/book/{{ car.id }}"
+            >Book
+            </button>
+          </div>
         </div>
         
       </div>

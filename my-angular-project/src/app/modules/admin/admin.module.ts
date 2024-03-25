@@ -6,6 +6,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { NgZorroImportsModule } from 'src/app/NgZorroImportsModule';
 import { PostCarComponent } from './components/post-car/post-car.component';
 import { UpdateCarComponent } from './components/update-car/update-car.component';
+import { GetBookingsComponent } from './components/get-bookings/get-bookings.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { UpdateCarComponent } from './components/update-car/update-car.component
     AdminDashboardComponent,
     PostCarComponent,
     UpdateCarComponent,
+    GetBookingsComponent,
     
   ],
   imports: [

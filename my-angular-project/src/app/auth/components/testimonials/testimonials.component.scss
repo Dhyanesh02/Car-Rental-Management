@@ -1,0 +1,9 @@
+.responsive-image {
+  /* Option 1: Set maximum width and height (preserves aspect ratio) */
+  max-width: 100%;  /* Image scales down but won't overflow container */
+  height: 90%;     /* Height adjusts proportionally to width */
+
+  /* Option 2: Use CSS object-fit property for more control */
+  /* object-fit: contain;  /* Scales to fit without cropping */
+  /* object-fit: cover;  /* Scales to fill the element (might crop) */
+}

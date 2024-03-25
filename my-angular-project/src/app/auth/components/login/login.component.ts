@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { StorageService } from '../../services/storage/storage.service';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   isSpinning:boolean=false;
   loginForm!:FormGroup;
+  loginError: string | null = null;
 
   constructor(private fb: FormBuilder,
     private authService: AuthService,
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email:[null,[Validators.email,Validators.required]],
-      password:[null,[Validators.required]],
+      password:[null,[Validators.required, Validators.minLength(5)]],
     })
   }
 
@@ -46,7 +47,11 @@ export class LoginComponent implements OnInit {
           this.message.error("Bad credentials",{nzDuration: 5000});
         }
       }
-    })
+    },error =>{
+      if(error.status===403){
+        this.message.error("Incorrect email or password. Please Check again!",{nzDuration:5000});
+      }
+    });
   }
 
 }

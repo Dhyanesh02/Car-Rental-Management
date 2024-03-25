@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/customer")
 @RequiredArgsConstructor
+
 public class CustomerController {
     private final CustomerService customerService;
 
@@ -28,5 +29,15 @@ public class CustomerController {
             return ResponseEntity.status(HttpStatus.CREATED).build();
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+    @GetMapping("/car/{carId}")
+    public ResponseEntity<CarDto> getCarById(@PathVariable Long carId){
+        CarDto carDto = customerService.getCarById(carId);
+        if(carDto== null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(carDto);
+    }
+    @GetMapping("/car/bookings/{userId}")
+    public ResponseEntity<List<BookACarDto>>getBookingsByUserId(@PathVariable Long userId){
+        return ResponseEntity.ok(customerService.getBookingsByUserId(userId));
     }
 }

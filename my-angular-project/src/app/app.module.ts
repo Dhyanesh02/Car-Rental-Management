@@ -14,6 +14,10 @@ import { LoginComponent } from './auth/components/login/login.component';
 import { SignupComponent } from './auth/components/signup/signup.component';
 import { NgZorroImportsModule } from './NgZorroImportsModule';
 import { HomeComponent } from './auth/components/home/home.component';
+import { AboutComponent } from './auth/components/about/about.component';
+import { ServiceComponent } from './auth/components/service/service.component';
+import { TestimonialsComponent } from './auth/components/testimonials/testimonials.component';
+import { ContactComponent } from './auth/components/contact/contact.component';
 
 
 
@@ -25,7 +29,11 @@ registerLocaleData(en);
     AppComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    AboutComponent,
+    ServiceComponent,
+    TestimonialsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
