@@ -1,7 +1,7 @@
 
 <h1 align="center">
   <br>
-  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="https://drive.google.com/file/d/176CMwPvSBKiqLJ4XNWCl-N_9YsRW-koy/view?usp=drive_link" alt="CarZillac" width="200"></a>
+  <a href="http://www.amitmerchant.com/electron-markdownify"><img src="my-angular-project/src/assets/Black and White Car Rental Service Logo.jpg" alt="CarZillac" width="200"></a>
   <br>
   Carzillac Booking
   <br>
