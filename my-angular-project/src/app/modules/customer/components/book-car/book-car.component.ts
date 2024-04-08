@@ -4,6 +4,7 @@ import { CustomerService } from '../../services/customer.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StorageService } from 'src/app/auth/services/storage/storage.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-book-car',
@@ -17,15 +18,15 @@ export class BookCarComponent{
     private activatedRoute: ActivatedRoute,
     private fb : FormBuilder,
     private message:NzMessageService,
-    private router:Router) { }
-
+    private router:Router,
+    private datePipe: DatePipe) { }
 
     carId: number = this.activatedRoute.snapshot.params["id"]
     car: any;
     processedImage: any;
     validateForm!:FormGroup;
     isSpinning = false;
-    dateFormat :"DD-MM-YYYY";
+    dateFormat :'yyyy-MM-dd';
 
   ngOnInit(){
     this.validateForm = this.fb.group({
@@ -46,9 +47,13 @@ export class BookCarComponent{
   bookACar(data: any){
     console.log(data);
     this.isSpinning=true;
+    // Convert dates to MySQL format
+  let toDateFormatted = this.datePipe.transform(data.toDate, 'yyyy-MM-dd');
+  let fromDateFormatted = this.datePipe.transform(data.fromDate, 'yyyy-MM-dd');
+
     let bookACarDto={
-      toDate: data.toDate,
-      fromDate: data.fromDate,
+      toDate: toDateFormatted,
+      fromDate: fromDateFormatted,
       userId:StorageService.getUserId(),
       carId: this.carId
     }

@@ -48,28 +48,28 @@ public class AuthController {
     }
     @PostMapping("/login")
     public AuthenticationResponse createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest)throws
-        BadCredentialsException,
-                DisabledException,
-                UsernameNotFoundException{
-            try{
-                authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                        authenticationRequest.getEmail(),
-                        authenticationRequest.getPassword()));
-            }
-            catch(BadCredentialsException e){
-                throw new BadCredentialsException("Incorrect username or password");
-            }
-            final UserDetails userDetails = userService.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
-            Optional<User> optionalUser = userRepository.findFirstByEmail(userDetails.getUsername());
-            final String jwt = jwtUtil.generateToken(userDetails);
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            if(optionalUser.isPresent()){
-                authenticationResponse.setJwt(jwt);
-                authenticationResponse.setUserId(optionalUser.get().getId());
-                authenticationResponse.setUserRole(optionalUser.get().getUserRole());
-            }
-            return authenticationResponse;
+            BadCredentialsException,
+            DisabledException,
+            UsernameNotFoundException{
+        try{
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getEmail(),
+                    authenticationRequest.getPassword()));
         }
+        catch(BadCredentialsException e){
+            throw new BadCredentialsException("Incorrect username or password");
+        }
+        final UserDetails userDetails = userService.userDetailsService().loadUserByUsername(authenticationRequest.getEmail());
+        Optional<User> optionalUser = userRepository.findFirstByEmail(userDetails.getUsername());
+        final String jwt = jwtUtil.generateToken(userDetails);
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse();
+        if(optionalUser.isPresent()){
+            authenticationResponse.setJwt(jwt);
+            authenticationResponse.setUserId(optionalUser.get().getId());
+            authenticationResponse.setUserRole(optionalUser.get().getUserRole());
+        }
+        return authenticationResponse;
+    }
     @PostMapping("/test-request")
     public ResponseEntity<String> testPostRequest() {
         return ResponseEntity.ok("POST request successful");

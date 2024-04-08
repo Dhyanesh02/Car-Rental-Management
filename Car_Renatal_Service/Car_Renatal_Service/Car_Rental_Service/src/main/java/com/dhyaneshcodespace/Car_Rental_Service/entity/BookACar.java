@@ -16,11 +16,9 @@ public class BookACar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @Temporal(TemporalType.TIMESTAMP) // Add this annotation for storing date and time
+    @Temporal(TemporalType.DATE)
     private Date fromDate;
-
-    @Temporal(TemporalType.TIMESTAMP) // Add this annotation for storing date and time
+    @Temporal(TemporalType.DATE)
     private Date toDate;
 
     private Long days;

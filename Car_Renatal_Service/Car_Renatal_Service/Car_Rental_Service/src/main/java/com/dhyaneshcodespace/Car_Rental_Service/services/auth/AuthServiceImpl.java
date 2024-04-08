@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 public class AuthServiceImpl implements AuthService{
     private final UserRepository userRepository;
 
-@PostConstruct
-public void createAdminAccount(){
+    @PostConstruct
+    public void createAdminAccount(){
         User adminAccount = userRepository.findByUserRole(UserRole.ADMIN);
         if(adminAccount == null){
             User newAdminAccount = new User();

@@ -26,7 +26,7 @@ public class AdminServiceImpl implements AdminService {
             car.setYear(carDto.getYear());
             car.setType(carDto.getType());
             car.setDescription(carDto.getDescription());
-            car.setTransmission(carDto.getTransmission());          
+            car.setTransmission(carDto.getTransmission());
 
             car.setImage(carDto.getImage().getBytes());
             carRepository.save(car);
@@ -54,24 +54,24 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean updateCar(Long carId, CarDto carDto) throws IOException {
-       Optional<Car> optionalCar = carRepository.findById(carId);
-       if(optionalCar.isPresent()){
-           Car existingCar = optionalCar.get();
-           if(carDto.getImage()!=null)
-               existingCar.setImage(carDto.getImage().getBytes());
-           existingCar.setName(carDto.getName());
-           existingCar.setBrand(carDto.getBrand());
-           existingCar.setColor(carDto.getColor());
-           existingCar.setPrice(carDto.getPrice());
-           existingCar.setYear(carDto.getYear());
-           existingCar.setType(carDto.getType());
-           existingCar.setDescription(carDto.getDescription());
-           existingCar.setTransmission(carDto.getTransmission());
-           carRepository.save(existingCar);
-           return true;
-       }else{
-           return false;
-       }
+        Optional<Car> optionalCar = carRepository.findById(carId);
+        if(optionalCar.isPresent()){
+            Car existingCar = optionalCar.get();
+            if(carDto.getImage()!=null)
+                existingCar.setImage(carDto.getImage().getBytes());
+            existingCar.setName(carDto.getName());
+            existingCar.setBrand(carDto.getBrand());
+            existingCar.setColor(carDto.getColor());
+            existingCar.setPrice(carDto.getPrice());
+            existingCar.setYear(carDto.getYear());
+            existingCar.setType(carDto.getType());
+            existingCar.setDescription(carDto.getDescription());
+            existingCar.setTransmission(carDto.getTransmission());
+            carRepository.save(existingCar);
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
