@@ -18,4 +18,4 @@
   <a href="#license">License</a>
 </p>
 
-![screenshot](Car_Renatal_Service/Car_Renatal_Service/Car_Rental_Service/src/main/resources/Screenshot 2024-05-23 211619.png)
+![screenshot](https://github.com/Dhyanesh02/Car-Rental-Management/blob/74d558780bd7881a17d7293598ca507e6e05adc9/Car_Renatal_Service/Car_Renatal_Service/Car_Rental_Service/src/main/resources/Screenshot%202024-05-23%20211619.png)
